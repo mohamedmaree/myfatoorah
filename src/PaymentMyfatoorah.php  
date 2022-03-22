@@ -2,8 +2,9 @@
 namespace maree\myfatoorah;
 use Exception;
 use maree\myfatoorah\Myfatoorah;
+
 class PaymentMyfatoorah extends Myfatoorah {
-    
+
 /**
  *  PaymentMyfatoorah handle the payment process of MyFatoorah API endpoints
  * 
