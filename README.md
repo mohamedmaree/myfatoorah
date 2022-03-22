@@ -29,21 +29,21 @@ Route::get('payment/error', [\App\Http\Controllers\MyFatoorahController::class, 
 ## At the controller
 
 ```php
-use maree\myfatoorah\PaymentMyfatoorah;
-    public function  checkout(){
-        $pay      = new PaymentMyfatoorah();
+use maree\myfatoorah\MyfatoorahPay;
+    public function checkout(){
+        $pay      = new MyfatoorahPay();
         $postFields = [
             'NotificationOption' => 'Lnk',     //'SMS', 'EML', or 'ALL'
-            'InvoiceValue'       => $priceDouble,   //the price the customer will pay
-            'CustomerName'       => auth()->user()->name, 
+            'InvoiceValue'       => 1,   //the price the customer will pay
+            'CustomerName'       => 'maree', 
             'DisplayCurrencyIso' => 'SAR',
             'MobileCountryCode'  => '+966',
-            'CustomerMobile'     => ltrim(auth()->user()->phone,'0'),
+            'CustomerMobile'     => '123456789',
             'CallBackUrl'        => route('callback'),    //the route that will be redirected to in the success
             'ErrorUrl'           => route('error'), //the route that will be redirected to in the fail
             'Language'           => 'ar',
-            'CustomerReference'  => auth()->id(),    // the refrence to the customer and wil be returned in the respone of the success
-            'UserDefinedField'   => $type,//user,product,...  //(optional) extra key and wil be returned in the respone of the succes
+            'CustomerReference'  => auth()->id(),//user id    // the refrence to the customer and wil be returned in the respone of the success
+            'UserDefinedField'   => 'user',//user,product,...  //(optional) extra key and wil be returned in the respone of the succes
         ];
         $data = $pay->getInvoiceURL($postFields);
         return redirect($data['invoiceURL']);
@@ -55,15 +55,14 @@ use maree\myfatoorah\PaymentMyfatoorah;
 
 
 ```php
-use maree\myfatoorah\PaymentMyfatoorah;
+use maree\myfatoorah\MyfatoorahPay;
    
     public function callback(){
-        $pay          = new PaymentMyfatoorah();
+        $pay          = new MyfatoorahPay();
         $responseData = $pay->getPaymentStatus(request('paymentId'), 'PaymentId');
         $responseDataArr = json_decode(json_encode($responseData), true);
         if ($responseDataArr['focusTransaction']['TransactionStatus'] == 'Succss') { //check if the transaction is the success
             $user_id = $responseDataArr['CustomerReference'];    //get the cutomer refrence
-            $user = User::findOrFail($user_id);
             if ($responseDataArr['UserDefinedField'] == 'user') { //get the extra key
                 // code
             } elseif ($responseDataArr['UserDefinedField'] == 'product') {
@@ -71,10 +70,9 @@ use maree\myfatoorah\PaymentMyfatoorah;
             }
             return response()->json(['status' => 'success','msg' => 'payment success']);
         }else{
-   	    	return response()->json(['status' => 'fail','msg' => 'payment fail']);
+            return response()->json(['status' => 'fail','msg' => 'payment fail']);
         }
     }
-
 
 ```
 
@@ -82,7 +80,7 @@ use maree\myfatoorah\PaymentMyfatoorah;
 
 
 ```php
-use maree\myfatoorah\PaymentMyfatoorah;
+use maree\myfatoorah\MyfatoorahPay;
    
     public function error(Request $request) {
    	    return response()->json(['status' => 'fail','msg' => 'payment fail']);

@@ -1,9 +1,8 @@
 <?php
 namespace maree\myfatoorah;
-use Exception;
 use maree\myfatoorah\Myfatoorah;
 
-class PaymentMyfatoorah extends Myfatoorah {
+class MyfatoorahPay extends Myfatoorah{
 
 /**
  *  PaymentMyfatoorah handle the payment process of MyFatoorah API endpoints
@@ -22,7 +21,6 @@ class PaymentMyfatoorah extends Myfatoorah {
     protected $isDirectPayment = false;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------    
-
     /**
      * List available Payment Gateways.
      * 
