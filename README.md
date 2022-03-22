@@ -25,7 +25,9 @@ Route::get('payment/callback', [\App\Http\Controllers\MyFatoorahController::clas
 Route::get('payment/error', [\App\Http\Controllers\MyFatoorahController::class, 'error']);
 
 ```
-##At the controller
+
+## At the controller
+
 ```php
 use maree\myfatoorah\PaymentMyfatoorah;
     public function  checkout(){
@@ -48,7 +50,9 @@ use maree\myfatoorah\PaymentMyfatoorah;
     }
 
 ```
-##Get callback to check payment status
+
+## Get callback to check payment status
+
 
 ```php
 use maree\myfatoorah\PaymentMyfatoorah;
@@ -74,7 +78,8 @@ use maree\myfatoorah\PaymentMyfatoorah;
 
 ```
 
-##Error page
+## Error page
+
 
 ```php
 use maree\myfatoorah\PaymentMyfatoorah;
