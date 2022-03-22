@@ -1,0 +1,26 @@
+{
+    "name": "maree/myfatoorah",
+    "description": "package to integrate payment with myfatoorah payment gateway api",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mohamed maree",
+            "email": "m7mdmaree26@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "maree\\myfatoorah\\" : "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "maree\\myfatoorah\\MyfatoorahServiceProvider"
+            ]
+        }
+    }       
+}
