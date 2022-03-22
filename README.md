@@ -41,7 +41,7 @@ use maree\myfatoorah\PaymentMyfatoorah;
             'ErrorUrl'           => route('error'), //the route that will be redirected to in the fail
             'Language'           => 'ar',
             'CustomerReference'  => auth()->id(),    // the refrence to the customer and wil be returned in the respone of the success
-            'UserDefinedField'   => $type,     //(optional) extra key and wil be returned in the respone of the succes
+            'UserDefinedField'   => $type,//user,product,...  //(optional) extra key and wil be returned in the respone of the succes
         ];
         $data = $pay->getInvoiceURL($postFields);
         return redirect($data['invoiceURL']);
